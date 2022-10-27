@@ -11,11 +11,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use('/', router);
-// app.use('*', (req, res, next) => {
-//     res.status(404);
-//     next(new Error(`Router not found.`)); 
-// })
+app.use('/api', router);
+app.use('*', (req, res, next) => {
+    res.status(404);
+    next(new Error(`Router not found.`)); 
+})
 
 app.use((err, req, res, next) => {
     res.json({ err: err.message })
